@@ -1,3 +1,4 @@
+package Arrays;
 public class EvenArray {
     public static void evenArray(int[] arr) {
         int count = 0;

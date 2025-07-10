@@ -1,9 +1,11 @@
+package Arrays;
 public class ReverseArray {
     public static void reversArray(int[] arr) {
         for (int i = 0; i < arr.length / 2; i++) {
-            int temp = arr[i];
-            arr[i] = arr[arr.length - i - 1];
-            arr[arr.length - i - 1] = temp;
+            // swap two values with arithmetic operation
+            arr[i] = arr[i] + arr[arr.length - i - 1];
+            arr[arr.length - i - 1] = arr[i] - arr[arr.length - i - 1];
+            arr[i] = arr[i] - arr[arr.length - i - 1];
         }
     }
 
