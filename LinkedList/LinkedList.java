@@ -237,7 +237,15 @@ class LinkedList {
         return slowPtr;
     }
 
-    public int findNthFromEnd(int n) {
+    public Node getLastNode() {
+        Node currNode = head;
+        while (currNode.next != null) {
+            currNode = currNode.next;
+        }
+        return currNode;
+    }
+
+    public Node findNthFromEnd(int n) {
         if (n <= 0 || n > getSize()) {
             throw new IllegalArgumentException("N is out the bound of the list");
         }
@@ -245,7 +253,7 @@ class LinkedList {
         for (int i = 0; i < getSize() - n; i++) {
             currNode = currNode.next;
         }
-        return currNode.value;
+        return currNode;
     }
 
     public int findNthFromEndWithoutUseSize(int n) {
@@ -278,11 +286,45 @@ class LinkedList {
         }
     }
 
-    public void insertInSorted(int value){
+    public void insertInSorted(int value) {
         Node currNode = head;
         Node newNode = new Node(value);
-        while (currNode != null && currNode.value <= newNode.value) {
-            
+        while (currNode.next != null && currNode.value < newNode.value) {
+            currNode = currNode.next;
+        }
+        newNode.next = currNode.next;
+        currNode.next = newNode;
+    }
+
+    public void removeGivenKey(int key) {
+        Node currNode = head;
+        Node temp = null;
+        if (currNode.value == key) {
+            head = head.next.next;
+        } else {
+            while (currNode != null && currNode.value != key) {
+                temp = currNode;
+                currNode = currNode.next;
+            }
+            if (currNode == null) {
+                return;
+            }
+            temp.next = currNode.next;
         }
     }
+
+    public boolean detectLoop() {
+        Node slowPtr = head;
+        Node fastPtr = head;
+        while (fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            if (fastPtr == slowPtr) {
+                System.out.println("Loops detected");
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
