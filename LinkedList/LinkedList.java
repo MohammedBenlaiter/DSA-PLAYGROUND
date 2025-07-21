@@ -313,7 +313,7 @@ class LinkedList {
         }
     }
 
-    public boolean detectLoop() {
+    public Node detectLoop() {
         Node slowPtr = head;
         Node fastPtr = head;
         while (fastPtr != null && fastPtr.next != null) {
@@ -321,10 +321,37 @@ class LinkedList {
             slowPtr = slowPtr.next;
             if (fastPtr == slowPtr) {
                 System.out.println("Loops detected");
-                return true;
+                return getStartingLoopNode(slowPtr);
             }
         }
-        return false;
+        return null;
     }
 
+    // Floyd's Cycle Detection algorithm
+    public Node getStartingLoopNode(Node slowPtr) {
+        Node temp = head;
+        while (slowPtr != temp) {
+            temp = temp.next;
+            slowPtr = slowPtr.next;
+        }
+        return temp;
+    }
+
+    public void removeLoop() {
+        Node slowPtr = head;
+        Node fastPtr = head;
+        while (fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            if (fastPtr == slowPtr) {
+                Node temp = head;
+                while (slowPtr.next != temp.next) {
+                    temp = temp.next;
+                    slowPtr = slowPtr.next;
+                }
+                slowPtr.next = null;
+                break;
+            }
+        }
+    }
 }

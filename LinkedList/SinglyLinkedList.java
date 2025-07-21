@@ -12,10 +12,23 @@ public class SinglyLinkedList {
         list.addAtLast(5);
         list.addAtLast(6);
         Node lastNode = list.getLastNode();
-        Node pointedNode = list.findNthFromEnd(4);
+        Node pointedNode = list.findNthFromEnd(5);
         lastNode.next = pointedNode;
         // list.printList();
 
-        System.out.println(list.detectLoop());
+        // System.out.println(list.detectLoop().value);
+        list.removeLoop();
+        // list.printList();
+
+        LinkedList list2 = new LinkedList();
+        LinkedList list3 = new LinkedList();
+        list2.addAtLast(1);
+        list2.addAtLast(4);
+        list2.addAtLast(8);
+        list3.addAtLast(3);
+        list3.addAtLast(6);
+        list3.addAtLast(7);
+        list2.mergeWithAnotherList(list3);
+        list2.printList();
     }
 }
