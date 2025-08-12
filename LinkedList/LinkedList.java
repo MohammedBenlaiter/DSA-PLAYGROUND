@@ -10,12 +10,7 @@ class LinkedList {
         this.size = 0;
     }
 
-    public int getSize() {
-        return size;
-    }
-
     class Node {
-
         int value;
         Node next;
 
@@ -25,8 +20,26 @@ class LinkedList {
         }
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public int getSize(Node head) {
+        int count = 0;
+        Node currNode = head;
+        while (currNode != null) {
+            count++;
+            currNode = currNode.next;
+        }
+        return count;
+    }
+
+    public Node getHead() {
+        return head;
+    }
+
     // validate
-    private Node acessSpecificPosition(int position, Node head) {
+    public Node acessSpecificPosition(int position, Node head) {
         Node currNode = head;
         if (position >= size || position < 0) {
             System.out.println("The position invalid");
@@ -353,5 +366,57 @@ class LinkedList {
                 break;
             }
         }
+    }
+
+    public void merge(Node a, Node b) {
+        size = getSize(a) + getSize(b);
+        head = new Node(0);
+        Node tail = head;
+        while (a != null && b != null) {
+            if (a.value <= b.value) {
+                tail.next = a;
+                a = a.next;
+            } else {
+                tail.next = b;
+                b = b.next;
+            }
+            tail = tail.next;
+        }
+        if (b == null) {
+            tail.next = a;
+        } else {
+            tail.next = b;
+        }
+        head = head.next;
+    }
+
+    public void merge(LinkedList a, LinkedList b) {
+        Node aHead = a.head;
+        Node bHead = b.head;
+        size = a.size + b.size;
+        if (aHead.value <= bHead.value) {
+            head = aHead;
+            aHead = aHead.next;
+        } else {
+            head = bHead;
+            bHead = bHead.next;
+        }
+        Node tail = head;
+        while (aHead != null && bHead != null) {
+            if (aHead.value <= bHead.value) {
+                tail.next = aHead;
+                aHead = aHead.next;
+            } else {
+                tail.next = bHead;
+                bHead = bHead.next;
+            }
+            tail = tail.next;
+        }
+        if (bHead == null) {
+            tail.next = aHead;
+        } else {
+            tail.next = bHead;
+        }
+        head = head.next;
     }
 }
