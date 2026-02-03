@@ -419,4 +419,26 @@ class LinkedList {
         }
         head = head.next;
     }
+
+    public LinkedList addTwoNumbers(LinkedList l1, LinkedList l2) {
+        LinkedList result = new LinkedList();
+        result.head = new Node(0);
+        Node currNode = result.head;
+        int carry = 0;
+        Node a = l1.head;
+        Node b = l2.head;
+        while (a != null || b != null || carry > 0) {
+            int x = (a != null) ? a.value : 0;
+            int y = (b != null) ? b.value : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            currNode.next = new Node(sum % 10);
+            currNode = currNode.next;
+            result.size++;
+            a = (a != null) ? a.next : null;
+            b = (b != null) ? b.next : null;
+        }
+        result.head = result.head.next;
+        return result;
+    }
 }
