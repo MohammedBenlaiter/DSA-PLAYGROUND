@@ -21,14 +21,5 @@ public class Playground {
         System.out.println();
         list2.deleteAtEnd();
         list2.displayBackward();
-        System.out.println();
-        list2.deleteAtEnd();
-        list2.displayBackward();
-        System.out.println();
-        list2.deleteAtEnd();
-        list2.displayBackward();
-        System.out.println();
-        list2.deleteAtEnd();
-        list2.displayBackward();
     }
 }
