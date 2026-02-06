@@ -1,7 +1,5 @@
 package CircularSinglyLinkedList;
 
-import java.util.List;
-
 public class CircularSinglyLinkedList {
 
     private ListNode last;
